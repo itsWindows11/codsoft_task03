@@ -30,10 +30,10 @@ def calculate(num1, num2, operation) -> str:
         return str(num1 * num2)
     elif operation == "/":
         if num2 == 0:
-            return "Cannot divide by zero."
-        return str(num1 / num2)
+            return "divbyzero"
+        return str(formatNumber(num1 / num2))
     else:
-        return "Invalid operation."
+        return "invalid"
 
 while True:
     console.print("Welcome to Calculator!", end="\n\n", style="bold underline green")
@@ -71,7 +71,11 @@ while True:
         continue
     
     console.print()
-    console.print(f"[bold green]Result is:[/bold green]\n{result}", end="\n\n")
+
+    if result == "invalid" or result == "divbyzero":
+        console.print("Invalid operation." if result == "invalid" else "Invalid operation: cannot divide by zero.", end="\n\n", style="bold red")
+    else:
+        console.print(f"[bold green]Result is:[/bold green]\n{result}", end="\n\n")
 
     time.sleep(1)
     console.print("Would you like to try again? (yes/no): ", end="", style="bold blue")
